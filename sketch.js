@@ -13,6 +13,8 @@ function setup() {
   angleMode(DEGREES)
   noiseDetail(1)
 
+  window.alert ('Hey! Welcome to my project. I made a flow field that randomizes everytime you refresh. left click to take a png of your flowfield!')
+
 
 var density = 30
 var space = width / density
@@ -40,10 +42,10 @@ for (var y = 0; y<height; y+= space) {
 function draw() {
   noStroke()
   
-  if (frameCount * 5 <= points.length) {
+  if (frameCount * 10 <= points.length) {
     var max= frameCount * 2
     } else {
-      var max = points.length
+      var max = points.length * 2
       
       
     }
@@ -56,12 +58,18 @@ function draw() {
   
   for (var i=0; i< points.length; i++) {
     
-    var r = map(points[i].x, 0, width, 50,255)
-    var g = map(points[i].x, 0, height, 50,255)
-    var b = map(points[i].x, 0, width, 255,50)
-    var alpha = map(dist(width / 2, height / 2, points [i]. x, points[i].y, 0, 350, 400, 0))
-    
-    fill(r, g, b, alpha)
+    var r = floor(map(points[i].x, (220), 600, 50,255))
+    var g = floor(map(points[i].x, (200), 600, 50,255))
+    var b = floor(map(points[i].x, (200), 600, 255,50))
+    // var alpha = map(dist(width / 2, height / 2, points [i]. x, points[i].y, 0, 350, 400, 0))
+
+
+    alpha = 0.0
+    fill((r,g,b, 255));
+
+    noStroke();
+
+
     
    var angle = map(noise(points[i].x * mult, points[i].y * mult), 0,1,0,720)
    
@@ -77,7 +85,8 @@ function draw() {
 function mouseClicked() {
     saveCanvas('flowfield','png')
 
-    window.alert ('Hey! Welcome to my project. I made a flow field that randomizes everytime you refresh. left click to take a png of your flowfield!')
+    
+
 
 
 
